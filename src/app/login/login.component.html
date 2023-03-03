@@ -1,0 +1,22 @@
+
+<div class="bg">
+  <div class="loginBox">
+    <a [routerLink]="'/'">
+      <img src="/assets/logo.svg" style="  padding-bottom: 5px; width: 120px;">
+    </a><br>
+    Войдите с Solenopsys ID<br><br>
+
+
+    <div style="margin-bottom: 20px">
+      <ui-text-field [title]="" [(value)]="email" ></ui-text-field>
+    </div>
+    <div style="margin-bottom: 20px">
+      <ui-text-field [title]="" [password]="true"  [(value)]="code" ></ui-text-field>
+    </div>
+
+    <ui-form-button [title]="'Выслать код'" (click)="sendCode()"></ui-form-button>
+    <ui-form-button [title]="'Войти'"  (click)="sendLogin()"></ui-form-button>
+
+  </div>
+</div>
+

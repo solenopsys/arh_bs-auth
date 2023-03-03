@@ -1,0 +1,8 @@
+{
+  "name": "@solenopsys/fr-auth",
+  "version": "0.1.1",
+  "scripts": {
+    "test": "node index.js",
+    "build": "tsc -p tsconfig.lib.json"
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "projectType": "application",
+  "sourceRoot": "packages/fronts/fr-auth/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "baseHref": "/",
+        "outputPath": "dist/packages/fronts/ui",
+        "index": "packages/fronts/fr-auth/src/index.html",
+        "main": "packages/fronts/fr-auth/src/main.ts",
+        "polyfills": "packages/fronts/fr-auth/src/polyfills.ts",
+        "tsConfig": "packages/fronts/fr-auth/tsconfig.app.json",
+        "assets": [
+          "packages/fronts/fr-auth/src/favicon.ico",
+          "packages/fronts/fr-auth/src/assets",
+          {
+            "input": "packages/fr-auth/ui-templates/src/assets",
+            "glob": "**/*",
+            "output": "assets"
+          },
+          {
+            "input": "packages/fr-auth/ui-icons/src/assets",
+            "glob": "**/*",
+            "output": "assets"
+          },
+          {
+            "input": "packages/fr-auth/ui-charts/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/charts"
+          },
+          {
+            "input": "packages/fr-auth/ui-controls/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/controls"
+          },
+          {
+            "input": "packages/fr-auth/ui-editors/code/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/editor-code"
+          },
+          {
+            "input": "packages/fr-auth/ui-editors/content/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/editor-content"
+          },
+          {
+            "input": "packages/fr-auth/ui-editors/electronic/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/editor-electronic"
+          },
+          {
+            "input": "packages/fr-auth/ui-forms/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/forms"
+          },
+          {
+            "input": "packages/fr-auth/ui-layouts/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/layouts"
+          },
+          {
+            "input": "packages/fr-auth/ui-lists/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/lists"
+          },
+          {
+            "input": "packages/fr-auth/ui-modals/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/modals"
+          },
+          {
+            "input": "packages/fr-auth/ui-navigate/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/navigate"
+          },
+          {
+            "input": "packages/fr-auth/ui-publications/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/publications"
+          },
+          {
+            "input": "packages/fr-auth/ui-templates/src/stories",
+            "glob": "**/*",
+            "output": "assets/stories/templates"
+          }
+        ],
+        "styles": [
+          "packages/uimatrix/ui-templates/src/assets/styles.css"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "packages/fronts/fr-auth/src/environments/environment.ts",
+              "with": "packages/fronts/fr-auth/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "packages/fronts/fr-auth/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true,
+          "customWebpackConfig": {
+            "path": "packages/fronts/fr-auth/webpack.config.js"
+          }
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "fr-auth:build:production"
+        },
+        "development": {
+          "browserTarget": "fr-auth:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "packages/fronts/fr-auth/**/*.ts",
+          "packages/fronts/fr-auth/**/*.html"
+        ]
+      },
+      "outputs": [
+        "{options.outputFile}"
+      ]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "packages/fronts/fr-auth/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
