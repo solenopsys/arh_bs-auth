@@ -1,4 +1,3 @@
-import {TextGroupByPatchResolver, TextPageGroupComponent} from "@solenopsys/ui-publications";
 import {NgModule} from "@angular/core";
 import {HttpClientModule} from "@angular/common/http";
 import {CommonModule} from "@angular/common";
@@ -7,12 +6,18 @@ import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 import {createNgxs} from "@solenopsys/fl-storage";
 import {LoginComponent} from "./login/login.component";
-
+import {AppComponent} from "./app.component";
+import {BaseLayoutComponent} from "./base-layout/base-layout.component";
+import {environment} from "../environments/environment";
+import {UIFormsModule} from "@solenopsys/ui-forms";
+import {UIControlsModule} from "@solenopsys/ui-controls";
 
 
 @NgModule({
     declarations: [
         AppComponent,
+        LoginComponent,
+        BaseLayoutComponent
     ],
     imports: [
         HttpClientModule,
@@ -24,18 +29,17 @@ import {LoginComponent} from "./login/login.component";
             {
                 path: "",
                 component: BaseLayoutComponent,
-                children: [{
-                    path: "",
-                    component: MainPageComponent
-                }]
-            }, {
-                path: "login",
-                component: LoginComponent
+                children: [
+                     {
+                        path: "login",
+                        component: LoginComponent
+                    }]
             }
         ], { initialNavigation: "enabledBlocking" }),
 
         ...createNgxs(!environment.production, [], true),
-        UiFormsModule
+        UIFormsModule,
+        UIControlsModule
     ],
     providers: [{ provide: "assets_dir", useValue: "" }],
     bootstrap: [AppComponent]
