@@ -1,22 +1,28 @@
-
 <div class="bg">
-  <div class="loginBox">
-    <a [routerLink]="'/'">
-      <img src="/assets/logo.svg" style="  padding-bottom: 5px; width: 120px;">
-    </a><br>
-    Войдите с Solenopsys ID<br><br>
+    <div class="loginBox">
+        <a [routerLink]="'/'">
+            <img src="/assets/logo.svg" style="  padding-bottom: 5px; width: 120px;">
+        </a><br>
+        Войдите с Solenopsys ID<br><br>
 
 
-    <div style="margin-bottom: 20px">
-      <ui-text-field [title]="" [(value)]="email" ></ui-text-field>
+        <div style="margin-bottom: 20px">
+            <ui-text-field [title]="'Email'" [(value)]="email"></ui-text-field>
+        </div>
+        <div style="margin-bottom: 20px">
+            <ui-text-field [title]="'Password'" [password]="true" [(value)]="code"></ui-text-field>
+        </div>
+
+        <div>
+            <ui-button [title]="'Войти'" (click)="sendLogin()"></ui-button>
+        </div>
+
+
+        <ui-multiline-field [title]="'Password'">
+
+        </ui-multiline-field>
+
+        <ui-button [title]="'Зарегистрироваться'" (click)="sendCode()"></ui-button>
     </div>
-    <div style="margin-bottom: 20px">
-      <ui-text-field [title]="" [password]="true"  [(value)]="code" ></ui-text-field>
-    </div>
-
-    <ui-button [title]="'Выслать код'" (click)="sendCode()"></ui-button>
-    <ui-button [title]="'Войти'"  (click)="sendLogin()"></ui-button>
-
-  </div>
 </div>
 
