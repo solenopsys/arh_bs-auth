@@ -10,7 +10,7 @@
       ],
       "options": {
         "baseHref": "/",
-        "outputPath": "dist/packages/fronts/ui",
+        "outputPath": "dist/fronts/fr-auth",
         "index": "packages/fronts/fr-auth/src/index.html",
         "main": "packages/fronts/fr-auth/src/main.ts",
         "polyfills": "packages/fronts/fr-auth/src/polyfills.ts",
