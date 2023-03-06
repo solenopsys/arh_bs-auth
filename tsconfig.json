@@ -17,9 +17,6 @@
     },
     {
       "path": "packages/fronts/fr-auth/tsconfig.spec.json"
-    },
-    {
-      "path": "packages/fronts/fr-auth/tsconfig.editor.json"
     }
   ],
   "extends": "../../../tsconfig.base.json",
