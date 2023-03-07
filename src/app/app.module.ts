@@ -11,13 +11,17 @@ import {BaseLayoutComponent} from "./base-layout/base-layout.component";
 import {environment} from "../environments/environment";
 import {UIFormsModule} from "@solenopsys/ui-forms";
 import {UIControlsModule} from "@solenopsys/ui-controls";
+import { StatusComponent } from './status/status.component';
+import { QrcodeComponent } from './qrcode/qrcode.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
-        BaseLayoutComponent
+        BaseLayoutComponent,
+        StatusComponent,
+        QrcodeComponent
     ],
     imports: [
         HttpClientModule,
@@ -30,6 +34,10 @@ import {UIControlsModule} from "@solenopsys/ui-controls";
                 path: "",
                 component: BaseLayoutComponent,
                 children: [
+                    {
+                        path: "",
+                        component: StatusComponent
+                    },
                      {
                         path: "login",
                         component: LoginComponent

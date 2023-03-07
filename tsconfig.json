@@ -13,10 +13,10 @@
   "include": [],
   "references": [
     {
-      "path": ".packages/fronts/fr-auth/tsconfig.app.json"
+      "path": "./tsconfig.app.json"
     },
     {
-      "path": "packages/fronts/fr-auth/tsconfig.spec.json"
+      "path": "./tsconfig.spec.json"
     }
   ],
   "extends": "../../../tsconfig.base.json",

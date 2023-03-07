@@ -3,26 +3,40 @@
         <a [routerLink]="'/'">
             <img src="/assets/logo.svg" style="  padding-bottom: 5px; width: 120px;">
         </a><br>
-        Войдите с Solenopsys ID<br><br>
+        E-mail:<br>
 
 
         <div style="margin-bottom: 20px">
             <ui-text-field [title]="'Email'" [(value)]="email"></ui-text-field>
         </div>
-        <div style="margin-bottom: 20px">
-            <ui-text-field [title]="'Password'" [password]="true" [(value)]="code"></ui-text-field>
-        </div>
 
-        <div>
-            <ui-button [title]="'Войти'" (click)="sendLogin()"></ui-button>
-        </div>
+        <ng-container *ngIf="email">
+            Password:<br>
+            <div style="margin-bottom: 20px">
+                <ui-text-field [title]="'Password'" [password]="true" [(value)]="code"></ui-text-field>
+            </div>
 
 
-        <ui-multiline-field [title]="'Password'">
 
-        </ui-multiline-field>
+            <ng-container *ngIf="code">
 
-        <ui-button [title]="'Зарегистрироваться'" (click)="sendCode()"></ui-button>
+                <div>
+                    <ui-button [title]="'Войти'" (click)="sendLogin()"></ui-button>
+                </div>
+                <ui-multiline-field [title]="'Password'" [value]="mnemonic">
+
+                </ui-multiline-field>
+
+                Protected seed:
+                <app-qrcode [data]="pr"></app-qrcode>
+
+                <ui-button [title]="'Зарегистрироваться'" (click)="sendCode()"></ui-button>
+            </ng-container>
+
+
+        </ng-container>
+
+
     </div>
 </div>
 
