@@ -12,7 +12,7 @@ import {environment} from "../environments/environment";
 import {UIFormsModule} from "@solenopsys/ui-forms";
 import {UIControlsModule} from "@solenopsys/ui-controls";
 import { StatusComponent } from './status/status.component';
-import { QrcodeComponent } from './qrcode/qrcode.component';
+import { QrcodeComponent } from '../../../../uimatrix/ui-qr/src/lib/qrcode/qrcode.component';
 
 
 @NgModule({

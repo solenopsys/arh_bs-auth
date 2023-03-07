@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
-import * as bip39 from 'bip39';
+
 import {Buffer} from 'buffer';
-import {Clipper} from "./pass";
+import {SeedClipper,generateMnemonic} from "@solenopsys/fl-crypto";
 
 async function encript(data: string, password: string) {
     // Generate a 256-bit salt;
@@ -29,7 +29,7 @@ export class LoginComponent {
     email: string;
     code: string;
     mnemonic: string;
-    clipper = new Clipper('AES-CBC');
+    clipper = new SeedClipper('AES-CBC');
 
     pr: string;
     dc: string;
@@ -40,8 +40,9 @@ export class LoginComponent {
 
 
     async initBip39() {
-        this.mnemonic = bip39.generateMnemonic();
 
+
+        this.mnemonic=generateMnemonic()
     }
 
 
