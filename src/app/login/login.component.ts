@@ -1,9 +1,7 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {firstValueFrom} from "rxjs";
 
 import {Buffer} from 'buffer';
-import {SeedClipper,generateMnemonic} from "@solenopsys/fl-crypto";
 import {blah} from "./ipld-service";
 
 
@@ -31,7 +29,7 @@ export class LoginComponent {
     email: string;
     code: string;
     mnemonic: string;
-    clipper = new SeedClipper('AES-CBC');
+  //  clipper = new SeedClipper('AES-CBC');
 
     pr: string;
     dc: string;
@@ -44,18 +42,18 @@ export class LoginComponent {
     async initBip39() {
 
 
-        this.mnemonic=generateMnemonic()
+  //      this.mnemonic=generateMnemonic()
     }
 
 
     sendCode() {
-        this.clipper.encryptText(this.mnemonic, this.code).then((pr: string) => {
-                this.pr = pr;
-                this.clipper.decryptText(pr, this.code).then((dc: string) => {
-                    this.dc=dc
-                });
-            }
-        );
+        // this.clipper.encryptText(this.mnemonic, this.code).then((pr: string) => {
+        //         this.pr = pr;
+        //         this.clipper.decryptText(pr, this.code).then((dc: string) => {
+        //             this.dc=dc
+        //         });
+        //     }
+        // );
 
         blah()
         // firstValueFrom(this.httpClient.post("/login", JSON.stringify({
