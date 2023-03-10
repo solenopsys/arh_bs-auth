@@ -4,6 +4,8 @@ import {firstValueFrom} from "rxjs";
 
 import {Buffer} from 'buffer';
 import {SeedClipper,generateMnemonic} from "@solenopsys/fl-crypto";
+import {blah} from "./ipld-service";
+
 
 async function encript(data: string, password: string) {
     // Generate a 256-bit salt;
@@ -54,6 +56,8 @@ export class LoginComponent {
                 });
             }
         );
+
+        blah()
         // firstValueFrom(this.httpClient.post("/login", JSON.stringify({
         //     email: this.email,
         //     password: this.code

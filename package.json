@@ -2,8 +2,11 @@
   "name": "@solenopsys/fr-auth",
   "version": "0.1.1",
   "dependencies": {
-
-
+    "@ipld/car": "^5.0.0",
+    "@ipld/dag-cbor": "^9.0.0",
+    "@ipld/dag-json": "^10.0.0",
+    "ipfs-core": "^0.18.0",
+    "multiformats": "^11.0.0"
   },
   "scripts": {
     "test": "node index.js",
