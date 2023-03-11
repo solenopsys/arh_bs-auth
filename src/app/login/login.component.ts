@@ -3,17 +3,8 @@ import {HttpClient} from "@angular/common/http";
 
 import {Buffer} from 'buffer';
 import {blah} from "./ipld-service";
+import {generateMnemonic, genJwt, SeedClipper} from "@solenopsys/fl-crypto";
 
-
-async function encript(data: string, password: string) {
-    // Generate a 256-bit salt;
-
-
-// Encrypt some data using AES-GCM with the derived key
-
-
-    //  console.log(decryptedText); // Output: "Hello, world!"
-}
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -29,7 +20,7 @@ export class LoginComponent {
     email: string;
     code: string;
     mnemonic: string;
-  //  clipper = new SeedClipper('AES-CBC');
+    clipper = new SeedClipper('AES-CBC');
 
     pr: string;
     dc: string;
@@ -42,20 +33,23 @@ export class LoginComponent {
     async initBip39() {
 
 
-  //      this.mnemonic=generateMnemonic()
+        this.mnemonic = generateMnemonic()
     }
 
 
     sendCode() {
-        // this.clipper.encryptText(this.mnemonic, this.code).then((pr: string) => {
-        //         this.pr = pr;
-        //         this.clipper.decryptText(pr, this.code).then((dc: string) => {
-        //             this.dc=dc
-        //         });
-        //     }
-        // );
+        this.clipper.encryptText(this.mnemonic, this.code).then((pr: string) => {
+                this.pr = pr;
+                this.clipper.decryptText(pr, this.code).then((dc: string) => {
+                    this.dc = dc
+                });
+            }
+        );
 
-        blah()
+        //blah()
+        genJwt({data: "blabla"}).then((jwt) => {
+            console.log("JWT RESP"+jwt);
+        })
         // firstValueFrom(this.httpClient.post("/login", JSON.stringify({
         //     email: this.email,
         //     password: this.code
