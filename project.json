@@ -90,7 +90,7 @@
           }
         ],
         "styles": [
-          "packages/uimatrix/ui-templates/src/assets/styles.css"
+          "packages/uimatrix/ui-templates/src/assets/styles.scss"
         ],
         "scripts": []
       },
