@@ -12,6 +12,7 @@ import {environment} from "../environments/environment";
 import { StatusComponent } from './status/status.component';
 import {UIControlsModule} from "@solenopsys/ui-controls";
 import {UIFormsModule} from "@solenopsys/ui-forms";
+import {UIQrModule} from "@solenopsys/ui-qr";
 import { createNgxs } from "@solenopsys/fl-storage";
 
 @NgModule({
@@ -25,6 +26,7 @@ import { createNgxs } from "@solenopsys/fl-storage";
     ],
     imports: [
         HttpClientModule,
+        UIQrModule,
         CommonModule,
         FormsModule,
         BrowserModule.withServerTransition({ appId: "solenopsys" }),
