@@ -137,6 +137,10 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "fr-auth:build",
+        "proxyConfig": "./packages/fronts/fr-auth/proxy.conf.json"
+      },
       "configurations": {
         "production": {
           "browserTarget": "fr-auth:build:production"

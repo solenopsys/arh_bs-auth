@@ -1,42 +1,19 @@
-<div class="bg">
-    <div class="loginBox">
-        <a [routerLink]="'/'">
-            <img src="/assets/logo.svg" style="  padding-bottom: 5px; width: 120px;">
-        </a><br>
-        E-mail:<br>
+<div>
+    E-mail:<br>
+    <div style="margin-bottom: 20px">
+        <ui-text-field [title]="'Login'" [(value)]="login"></ui-text-field>
+    </div>
 
-
+    <ng-container *ngIf="login">
+        Password:<br>
         <div style="margin-bottom: 20px">
-            <ui-text-field [title]="'Email'" [(value)]="email"></ui-text-field>
+            <ui-text-field [(value)]="password" [password]="true" [title]="'Password'"></ui-text-field>
         </div>
-
-        <ng-container *ngIf="email">
-            Password:<br>
-            <div style="margin-bottom: 20px">
-                <ui-text-field [(value)]="code" [password]="true" [title]="'Password'"></ui-text-field>
-            </div>
-
-
-
-            <ng-container *ngIf="code">
-
-                <div>
-                    <ui-button [title]="'Войти'" (click)="sendLogin()"></ui-button>
-                </div>
-                <ui-multiline-field [title]="'Password'" [value]="mnemonic">
-
-                </ui-multiline-field>
-
-                Protected seed:
-                <ui-qrcode [data]="pr"></ui-qrcode>
-
-                <ui-button [title]="'Зарегистрироваться'" (click)="sendCode()"></ui-button>
-            </ng-container>
-
+        <ng-container *ngIf="password">
 
         </ng-container>
-
-
-    </div>
+        {{decryptedKey}}
+    </ng-container>
 </div>
+
 
