@@ -1,5 +1,5 @@
 <div>
-    E-mail:<br>
+    Login:<br>
     <div style="margin-bottom: 20px">
         <ui-text-field [title]="'Login'" [(value)]="login"></ui-text-field>
     </div>
@@ -10,9 +10,8 @@
             <ui-text-field [(value)]="password" [password]="true" [title]="'Password'"></ui-text-field>
         </div>
         <ng-container *ngIf="password">
-
+            <ui-button [title]="'Войти'" (click)="load()"></ui-button>
         </ng-container>
-        {{decryptedKey}}
     </ng-container>
 </div>
 

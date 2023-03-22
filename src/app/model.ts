@@ -6,3 +6,6 @@ export interface RegisterData {
     publicKey: string;
     hash: string;
 }
+
+
+

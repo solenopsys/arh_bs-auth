@@ -2,9 +2,9 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 import {Buffer} from 'buffer';
-import {SeedClipper} from "@solenopsys/fl-crypto";
+import {genHash, genJwt, SeedClipper} from "@solenopsys/fl-crypto";
 import {firstValueFrom} from "rxjs";
-
+import {RegisterData} from "../model";
 
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -23,12 +23,18 @@ export class LoginComponent {
 
     clipper = new SeedClipper('AES-CBC');
 
-    encryptedKey: string;
-    decryptedKey: string;
-    private publicKey: string;
 
     constructor(private httpClient: HttpClient) {
     }
 
 
+    async load() {
+        const hash = await genHash(this.password, this.login);
+        const res = await firstValueFrom(this.httpClient.post<RegisterData>("/api/key", hash))
+        const privateKey = await this.clipper.decryptData(res.encryptedKey, this.password)
+
+        genJwt({user: res.publicKey, access: "simple"}, privateKey, '2h').then((jwt) => {
+            console.log("JWT RESP" + jwt);
+        });
+    }
 }
