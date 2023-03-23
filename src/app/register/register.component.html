@@ -1,46 +1,60 @@
+
 <div style="display: flex">
     <div style="width: 400px">
-        <div class="field-description"><b>Seed phase.</b> With the help of this phrase, you can perform any important
-            action in Solenopsys, such
-            as
-            logging in, sending money, and controlling your clusters.You can imagine your own seed phase or <a
-                    style="cursor: pointer;color:red;text-decoration: underline;" (click)="generateSeed()">generate</a>
-            it.
-        </div>
-
-        <ui-multiline-field [width]="400" [title]="'Password'" [(value)]="mnemonic"
-                            (valueChange)="regenerate.next()"></ui-multiline-field>
-        <br/>
-
-
-        <ng-container *ngIf="mnemonic">
-            <div style="margin-bottom: 20px">
-                <div class="field-description">
-                    <b>Password</b> to protect the seed phase. The seed phase is always stored and transferred in an
-                    encrypted >
-                </div>
-                <ui-text-field [width]="400" [(value)]="password" (valueChange)="regenerate.next()" [password]="true"
-                               [title]="'Password'"></ui-text-field>
+        <ng-container *ngIf="!success" style="display: flex">
+            <div class="field-description"><b>Seed phase.</b> With the help of this phrase, you can perform any
+                important
+                action in Solenopsys, such
+                as
+                logging in, sending money, and controlling your clusters.You can imagine your own seed phase or <a
+                        style="cursor: pointer;color:red;text-decoration: underline;"
+                        (click)="generateSeed()">generate</a>
+                it.
             </div>
 
-            <ng-container *ngIf="password">
+            <ui-multiline-field [width]="400" [title]="'Password'" [(value)]="mnemonic"
+                                (valueChange)="regenerate.next()"></ui-multiline-field>
+            <br/>
 
-                <div class="field-description">
-                    <b>Messager</b>, What is the most convenient way for you to authenticate?
-                </div>
+
+            <ng-container *ngIf="mnemonic">
                 <div style="margin-bottom: 20px">
-                    <ui-select-field [title]="'Login'" [(value)]="transport"
-                                     [dataProvider]="messagersProvider"></ui-select-field>
+                    <div class="field-description">
+                        <b>Password</b> to protect the seed phase. The seed phase is always stored and transferred in an
+                        encrypted >
+                    </div>
+                    <ui-text-field [width]="400" [(value)]="password" (valueChange)="regenerate.next()"
+                                   [password]="true"
+                                   [title]="'Password'"></ui-text-field>
                 </div>
 
-                <div class="field-description"><b>Login</b> name in your massager</div>
-                <div style="margin-bottom: 20px">
-                    <ui-text-field [title]="'Login'" [(value)]="login"></ui-text-field>
-                </div>
-                <ng-container *ngIf="login">
-                    <ui-button [title]="'Зарегистрироваться'" (click)="sendCode()"></ui-button>
+                <ng-container *ngIf="password">
+
+                    <div class="field-description">
+                        <b>Messager</b>, What is the most convenient way for you to authenticate?
+                    </div>
+                    <div style="margin-bottom: 20px">
+                        <ui-select-field [title]="'Login'" [(value)]="transport"
+                                         [dataProvider]="messagersProvider"></ui-select-field>
+                    </div>
+
+                    <div class="field-description"><b>Login</b> name in your massager</div>
+                    <div style="margin-bottom: 20px">
+                        <ui-text-field [title]="'Login'" [(value)]="login"></ui-text-field>
+                    </div>
+                    <ng-container *ngIf="login">
+                        <ui-button [title]="'Зарегистрироваться'" (click)="sendCode()"></ui-button>
+                    </ng-container>
+
+                    <ng-container *ngIf="error">
+                        Error: {{error.message}}
+                    </ng-container>
                 </ng-container>
             </ng-container>
+        </ng-container>
+        <ng-container *ngIf="success">
+            Private key is sent to the server. To store this key on the server, you need to open the link in the message that is
+            sent to you to the <b>{{transport?.title}}</b>.
         </ng-container>
     </div>
     <div>

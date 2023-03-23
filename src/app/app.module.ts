@@ -17,6 +17,7 @@ import {RegisterComponent} from './register/register.component';
 
 import {BootstrapComponent, UITemplatesModule, InterfaceState, MenuState, SetTabs} from "@solenopsys/ui-templates";
 import {Store} from "@ngxs/store";
+import { ConfirmComponent } from './confirm/confirm.component';
 
 export const PROVIDERS_CONF = [
     {provide: "assets_dir", useValue: ""},
@@ -33,6 +34,10 @@ const ROUTERS: Route[] = [
     {
         path: "status",
         component: StatusComponent
+    },
+    {
+        path: "confirm",
+        component: ConfirmComponent
     },
     {
         path: "login",
@@ -54,6 +59,7 @@ const PROVIDERS = [...PROVIDERS_CONF];
         LoginComponent,
         StatusComponent,
         RegisterComponent,
+        ConfirmComponent,
     ],
     imports: [
         HttpClientModule,

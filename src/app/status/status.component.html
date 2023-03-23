@@ -1,1 +1,5 @@
-<p>status works!</p>
+<div *ngIf="sessions">
+    <div *ngFor="let s of sessions">
+        {{s.pubKey}} -{{s.expiredAd}}
+    </div>
+</div>

@@ -1,5 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { generateMnemonic, generatePrivateKeyFromSeed, generatePublicKeyPrivate, genHash, SeedClipper} from '@solenopsys/fl-crypto';
+import {
+    generateMnemonic,
+    generatePrivateKeyFromSeed,
+    generatePublicKeyPrivate,
+    genHash,
+    SeedClipper
+} from '@solenopsys/fl-crypto';
 import {
     BehaviorSubject,
     debounceTime,
@@ -11,7 +17,7 @@ import {
     Subject,
     Subscription
 } from "rxjs";
-import { RegisterData} from "../model";
+import {RegisterData} from "../model";
 import {HttpClient} from "@angular/common/http";
 import {DataProvider, EntityTitle} from '@solenopsys/ui-utils';
 
@@ -33,7 +39,7 @@ class MessagersDataProvider implements DataProvider {
 
     byId(id: string): Observable<string> {
         return this.data.asObservable().pipe(map((list) => {
-          return  list.find(i=>i.uid===id)?.title
+            return list.find(i => i.uid === id)?.title
         }))
     }
 
@@ -56,43 +62,32 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     regenerate: Subject<void> = new Subject<void>();
 
-    transport:EntityTitle = EMAIL
+    transport: EntityTitle = EMAIL
 
     messagersProvider = new MessagersDataProvider();
 
-    private publicKey: string;
-    private subscription!: Subscription;
+    publicKey: string;
+    subscription!: Subscription;
     privateKey: Uint8Array;
+
+    success=false
+
+    error
 
     constructor(private httpClient: HttpClient) {
 
     }
 
     async sendCode() {
-
-
-
-
-
-
-        //this.decryptedKey = await this.clipper.decryptText(this.encryptedKey, this.password)
-
         const tr = this.transport.uid;
-
-        const hash = await genHash(this.password,this.login);
-
-
-
-        //string to buffer
-       // const mnemonicBuffer:Buffer=  Buffer.from(this.mnemonic, 'utf-8')
-      //   const privateKey = await generatePrivateKeyFromSeed(this.mnemonic);
+        const hash = await genHash(this.password, this.login);
         const publicKey = await generatePublicKeyPrivate(this.privateKey);
-        const pubkeyHex =  Buffer.from( publicKey).toString('hex');
+        const pubkeyHex = Buffer.from(publicKey).toString('hex');
         const registerData: RegisterData = {
             transport: tr,
             login: this.login,
             encryptedKey: this.encryptedKey,
-            publicKey:pubkeyHex,
+            publicKey: pubkeyHex,
             hash: hash
         }
 
@@ -100,7 +95,11 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 
         firstValueFrom(this.httpClient.post("/api/register", JSON.stringify(registerData))).then(res => {
+            this.success=true
             console.log(res)
+        }).catch(err => {
+            this.error=err
+            console.log(err)
         })
     }
 
@@ -116,7 +115,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subscription = this.regenerate.asObservable().pipe(debounceTime(300)).subscribe(async () => {
-             this.privateKey = await generatePrivateKeyFromSeed(this.mnemonic);
+            this.privateKey = await generatePrivateKeyFromSeed(this.mnemonic);
             this.encryptedKey = await this.clipper.encryptData(this.privateKey, this.password)
         });
     }
