@@ -1,8 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {
     generateMnemonic,
-    generatePrivateKeyFromSeed,
-    generatePublicKeyPrivate,
     genHash,
     SeedClipper
 } from '@solenopsys/fl-crypto';
@@ -115,6 +113,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subscription = this.regenerate.asObservable().pipe(debounceTime(300)).subscribe(async () => {
+
+            new CryptoTools()
             this.privateKey = await generatePrivateKeyFromSeed(this.mnemonic);
             this.encryptedKey = await this.clipper.encryptData(this.privateKey, this.password)
         });
