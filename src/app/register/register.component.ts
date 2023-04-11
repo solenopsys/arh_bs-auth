@@ -1,20 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {
-    generateMnemonic,
-    genHash,
-    SeedClipper
-} from '@solenopsys/fl-crypto';
-import {
-    BehaviorSubject,
-    debounceTime,
-    filter,
-    firstValueFrom,
-    map,
-    Observable,
-    pipe,
-    Subject,
-    Subscription
-} from "rxjs";
+import {CryptoTools, generateMnemonic, genHash, SeedClipper} from '@solenopsys/fl-crypto';
+import {BehaviorSubject, debounceTime, firstValueFrom, map, Observable, Subject, Subscription} from "rxjs";
 import {RegisterData} from "../model";
 import {HttpClient} from "@angular/common/http";
 import {DataProvider, EntityTitle} from '@solenopsys/ui-utils';
@@ -68,7 +54,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     subscription!: Subscription;
     privateKey: Uint8Array;
 
-    success=false
+    success = false
 
     error
 
@@ -79,8 +65,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     async sendCode() {
         const tr = this.transport.uid;
         const hash = await genHash(this.password, this.login);
-        const publicKey = await generatePublicKeyPrivate(this.privateKey);
-        const pubkeyHex = Buffer.from(publicKey).toString('hex');
+        const publicKey = await new CryptoTools().publicKeyFromPrivateKey(this.privateKey);
+        const pubkeyHex =   Array.from(publicKey).map(b => b.toString().padStart(2, '0')).join('');
         const registerData: RegisterData = {
             transport: tr,
             login: this.login,
@@ -93,10 +79,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
 
         firstValueFrom(this.httpClient.post("/api/register", JSON.stringify(registerData))).then(res => {
-            this.success=true
+            this.success = true
             console.log(res)
         }).catch(err => {
-            this.error=err
+            this.error = err
             console.log(err)
         })
     }
@@ -114,8 +100,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subscription = this.regenerate.asObservable().pipe(debounceTime(300)).subscribe(async () => {
 
-            new CryptoTools()
-            this.privateKey = await generatePrivateKeyFromSeed(this.mnemonic);
+            this.privateKey = await new CryptoTools().privateKeyFromSeed(this.mnemonic);
+
             this.encryptedKey = await this.clipper.encryptData(this.privateKey, this.password)
         });
     }

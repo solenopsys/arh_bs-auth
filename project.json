@@ -6,7 +6,7 @@
   "prefix": "app",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:webpack-browser",
+      "executor": "@angular-devkit/build-angular:browser-esbuild",
       "outputs": [
         "{options.outputPath}"
       ],
@@ -116,10 +116,7 @@
               "with": "packages/fronts/fr-auth/src/environments/environment.prod.ts"
             }
           ],
-          "outputHashing": "all",
-          "customWebpackConfig": {
-            "path": "packages/fronts/fr-auth/webpack.prod.config.js"
-          }
+          "outputHashing": "all"
         },
         "development": {
           "buildOptimizer": false,
@@ -127,10 +124,7 @@
           "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
-          "namedChunks": true,
-          "customWebpackConfig": {
-            "path": "packages/fronts/fr-auth/webpack.config.js"
-          }
+          "namedChunks": true
         }
       },
       "defaultConfiguration": "development"

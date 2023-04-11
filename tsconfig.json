@@ -6,11 +6,7 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-//    "paths": {
-//      "crypto": ["./node_modules/crypto-browserify"],
-//      "stream": ["./node_modules/stream-browserify"],
-//    }
+    "noFallthroughCasesInSwitch": true
   },
   "files": [],
   "include": [],

@@ -10,6 +10,6 @@
   },
   "scripts": {
     "test": "node index.js",
-    "build": "tsc -p tsconfig.lib.json"
+    "build": "etsc "
   }
 }

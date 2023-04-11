@@ -13,7 +13,7 @@ const {iconPlug} = require("../../icons");
  */
 const tsConfigPath =
     process.env.NX_TSCONFIG_PATH ??
-    path.join(__dirname, '../../tsconfig.base.json');
+    path.join(__dirname, '../../../tsconfig.base.json');
 
 const workspaceRootPath = path.join(__dirname, '../../');
 

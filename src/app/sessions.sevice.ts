@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import { decodeJwt } from "@solenopsys/fl-crypto";
+import {readToken} from "@solenopsys/fl-crypto";
 
 const STORAGE_KEY = "auth";
 
@@ -30,14 +30,12 @@ export class SessionsService{
         console.log("AUTH",)
         const items: Auth[] = [];
         if (obj) {
-
             const keys = Object.keys(obj);
             for (const key of keys) {
                 const jwtBytes =obj[key];
-                const jwtData=await decodeJwt(jwtBytes)
-                console.log("KEY", key, jwtData)
-                // @ts-ignore
-                items.push({pubKey: key, expiredAd: new Date(jwtData.exp*1000)})
+               // const jwtData=await readToken(jwtBytes)
+               // console.log("KEY", key, jwtData)
+             //   items.push({pubKey: key, expiredAd: new Date(jwtData.exp*1000)})
             }
 
         }

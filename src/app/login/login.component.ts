@@ -1,17 +1,13 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
-import {Buffer} from 'buffer';
-import {genHash, genJwt, SeedClipper} from "@solenopsys/fl-crypto";
 import {firstValueFrom} from "rxjs";
 import {RegisterData} from "../model";
 import {Router} from "@angular/router";
 import {SessionsService} from "../sessions.sevice";
+import {genHash, SeedClipper} from "@solenopsys/fl-crypto";
 
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-window.Buffer = Buffer;
 
 @Component({
     selector: 'app-login',
@@ -40,11 +36,11 @@ export class LoginComponent {
 
             this.result="success"
 
-            genJwt({user: res.publicKey, access: "simple"}, privateKey, '14d').then((jwt) => {
-                this.ss.saveSession(res.publicKey, jwt);
-                //navigate
-                this.router.navigate(['/status'], {queryParams: {state: jwt}})
-            });
+            // genJwt({user: res.publicKey, access: "simple"}, privateKey, '14d').then((jwt) => {
+            //     this.ss.saveSession(res.publicKey, jwt);
+            //     //navigate
+            //     this.router.navigate(['/status'], {queryParams: {state: jwt}})
+            // });
         } catch (e) {
             this.result="Error: "+e.message
         }

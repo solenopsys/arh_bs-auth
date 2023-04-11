@@ -15,9 +15,10 @@ import {UIQrModule} from "@solenopsys/ui-qr";
 import {createNgxs} from "@solenopsys/fl-storage";
 import {RegisterComponent} from './register/register.component';
 
-import {BootstrapComponent, UITemplatesModule, InterfaceState, MenuState, SetTabs} from "@solenopsys/ui-templates";
+import {BootstrapComponent, InterfaceState, MenuState, SetTabs, UITemplatesModule} from "@solenopsys/ui-templates";
 import {Store} from "@ngxs/store";
-import { ConfirmComponent } from './confirm/confirm.component';
+import {ConfirmComponent} from './confirm/confirm.component';
+import {CryptoModule} from "@solenopsys/fl-crypto";
 
 export const PROVIDERS_CONF = [
     {provide: "assets_dir", useValue: ""},
@@ -54,15 +55,10 @@ const PROVIDERS = [...PROVIDERS_CONF];
 
 // noinspection AngularInvalidEntryComponent
 @NgModule({
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        StatusComponent,
-        RegisterComponent,
-        ConfirmComponent,
-    ],
+
     imports: [
         HttpClientModule,
+        CryptoModule,
         CommonModule,
         FormsModule,
         BrowserModule.withServerTransition({appId: "solenopsys"}),
@@ -74,6 +70,13 @@ const PROVIDERS = [...PROVIDERS_CONF];
         UITemplatesModule,
         ...createNgxs(!environment.production, [InterfaceState, MenuState], true),
 
+    ],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        StatusComponent,
+        RegisterComponent,
+        ConfirmComponent,
     ],
     providers: PROVIDERS,
     bootstrap: [BootstrapComponent],

@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-    displayName: 'ui',
+    displayName: 'auth',
     preset: '../../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
     globals: {
@@ -9,7 +9,7 @@ export default {
             stringifyContentPathRegex: '\\.(html|svg)$',
         }
     },
-    coverageDirectory: '../../../coverage/packages/fronts/ui',
+    coverageDirectory: '../../../coverage/packages/fronts/fr-auth',
     transform: {
         '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular'
     },
