@@ -10,7 +10,7 @@
             <ui-text-field [(value)]="password" [password]="true" [title]="'Password'"></ui-text-field>
         </div>
         <ng-container *ngIf="password">
-            <ui-button [title]="'Войти'" (click)="load()"></ui-button>
+            <ui-button [title]="'Login'" (click)="load()"></ui-button>
         </ng-container>
 
         <div>{{result}}</div>
