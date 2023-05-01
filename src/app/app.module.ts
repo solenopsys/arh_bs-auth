@@ -8,54 +8,54 @@ import {Route, RouterModule} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
 import {AppComponent} from "./app.component";
 import {environment} from "../environments/environment";
-import {StatusComponent} from './status/status.component';
+import {StatusComponent} from "./status/status.component";
 import {UIControlsModule} from "@solenopsys/ui-controls";
 import {UIFormsModule} from "@solenopsys/ui-forms";
 import {UIQrModule} from "@solenopsys/ui-qr";
 import {createNgxs} from "@solenopsys/fl-storage";
-import {RegisterComponent} from './register/register.component';
+import {RegisterComponent} from "./register/register.component";
 
-import {BootstrapComponent, InterfaceState, MenuState, SetTabs, UITemplatesModule} from "@solenopsys/ui-templates";
+import {InterfaceState, SetTabs, UITemplatesModule,} from "@solenopsys/ui-templates";
 import {Store} from "@ngxs/store";
-import {ConfirmComponent} from './confirm/confirm.component';
+import {ConfirmComponent} from "./confirm/confirm.component";
 import {CryptoModule} from "@solenopsys/fl-crypto";
+import {BootstrapComponent} from "./bootstrap.component";
 
 export const PROVIDERS_CONF = [
     {provide: "assets_dir", useValue: ""},
     {provide: "mod_name", useValue: "exhibition"},
-    {provide: 'logo', useValue: "logo"},
+    {provide: "logo", useValue: "logo"},
 ];
 
 const ROUTERS: Route[] = [
     {
         path: "",
-        redirectTo: "status",
+        redirectTo: "login",
         pathMatch: 'full'
     },
     {
         path: "status",
-        component: StatusComponent
+        component: StatusComponent,
     },
     {
         path: "confirm",
-        component: ConfirmComponent
+        component: ConfirmComponent,
     },
     {
         path: "login",
-        component: LoginComponent
+        component: LoginComponent,
     },
     {
         path: "register",
-        component: RegisterComponent
-    }
+        component: RegisterComponent,
+    },
 
-]
+];
 
 const PROVIDERS = [...PROVIDERS_CONF];
 
 // noinspection AngularInvalidEntryComponent
 @NgModule({
-
     imports: [
         HttpClientModule,
         CryptoModule,
@@ -68,27 +68,28 @@ const PROVIDERS = [...PROVIDERS_CONF];
         UIFormsModule,
         UIControlsModule,
         UITemplatesModule,
-        ...createNgxs(!environment.production, [InterfaceState, MenuState], true),
-
+        ...createNgxs(!environment.production, [InterfaceState], true),
     ],
     declarations: [
+        BootstrapComponent,
         AppComponent,
         LoginComponent,
         StatusComponent,
         RegisterComponent,
         ConfirmComponent,
+
     ],
     providers: PROVIDERS,
     bootstrap: [BootstrapComponent],
 })
 export class AppModule {
     constructor(store: Store, private http: HttpClient) {
-        store.dispatch(new SetTabs(
-            [
-                {id: 'status', title: 'Status'},
-                {id: 'login', title: 'Login'},
-                {id: 'register', title: 'Register'}
-            ]
-        ))
+        store.dispatch(
+            new SetTabs([
+                {id: "status", title: "Status"},
+                {id: "login", title: "Login"},
+                {id: "register", title: "Register"},
+            ])
+        );
     }
 }

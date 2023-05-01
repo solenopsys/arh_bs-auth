@@ -5,7 +5,7 @@ import {firstValueFrom} from "rxjs";
 import {RegisterData} from "../model";
 import {Router} from "@angular/router";
 import {SessionsService} from "../sessions.sevice";
-import {genHash, SeedClipper} from "@solenopsys/fl-crypto";
+import {createToken, genHash, SeedClipper} from "@solenopsys/fl-crypto";
 
 
 
@@ -19,7 +19,7 @@ export class LoginComponent {
     login: string;
     password: string;
 
-    clipper = new SeedClipper('AES-CBC');
+    clipper = new SeedClipper('AES-CBC',crypto);
 
     result:string
 
@@ -34,13 +34,17 @@ export class LoginComponent {
             const res = await firstValueFrom(this.httpClient.post<RegisterData>("/api/key", hash))
             const privateKey = await this.clipper.decryptData(res.encryptedKey, this.password)
 
-            this.result="success"
+            console.log("succesed", res, privateKey)
 
-            // genJwt({user: res.publicKey, access: "simple"}, privateKey, '14d').then((jwt) => {
-            //     this.ss.saveSession(res.publicKey, jwt);
-            //     //navigate
-            //     this.router.navigate(['/status'], {queryParams: {state: jwt}})
-            // });
+            const token=createToken({user: res.publicKey, access: "simple",expired:"14d"}, privateKey);
+
+            this.ss.saveSession(res.publicKey, token);
+            //navigate
+            this.router.navigate(['/status'], {queryParams: {state: token}})
+            console.log("succes token", token)
+
+
+
         } catch (e) {
             this.result="Error: "+e.message
         }

@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     login: string;
 
-    clipper = new SeedClipper('AES-CBC');
+    clipper = new SeedClipper('AES-CBC',crypto);
     encryptedKey: string;
 
     regenerate: Subject<void> = new Subject<void>();
