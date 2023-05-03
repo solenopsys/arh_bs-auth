@@ -10,7 +10,11 @@ const EMAIL = {uid: "email", title: "Email"};
 
 class MessagersDataProvider implements DataProvider {
 
+
+
     privateKey: string;
+
+    public fieldWidth = 400;
 
     data: BehaviorSubject<EntityTitle[]> = new BehaviorSubject([
         {uid: "log", title: "Log"},
@@ -32,7 +36,7 @@ class MessagersDataProvider implements DataProvider {
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss']
+    styleUrls: ['./register.component.scss','../fields.scss']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
     password: string;
@@ -41,7 +45,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     login: string;
 
-    clipper = new SeedClipper('AES-CBC',crypto);
+    clipper = new SeedClipper('AES-CBC', crypto);
     encryptedKey: string;
 
     regenerate: Subject<void> = new Subject<void>();
@@ -57,6 +61,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     success = false
 
     error
+    fieldWidth=  300;
 
     constructor(private httpClient: HttpClient) {
 
@@ -66,7 +71,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         const tr = this.transport.uid;
         const hash = await genHash(this.password, this.login);
         const publicKey = await new CryptoTools().publicKeyFromPrivateKey(this.privateKey);
-        const pubkeyHex =   Array.from(publicKey).map(b => b.toString().padStart(2, '0')).join('');
+        const pubkeyHex = Array.from(publicKey).map(b => b.toString().padStart(2, '0')).join('');
         const registerData: RegisterData = {
             transport: tr,
             login: this.login,

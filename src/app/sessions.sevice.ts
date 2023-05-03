@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {readToken} from "@solenopsys/fl-crypto";
+import {hex2buf, readToken} from "@solenopsys/fl-crypto";
 
 const STORAGE_KEY = "auth";
 
@@ -32,10 +32,10 @@ export class SessionsService{
         if (obj) {
             const keys = Object.keys(obj);
             for (const key of keys) {
-                const jwtBytes =obj[key];
-               // const jwtData=await readToken(jwtBytes)
-               // console.log("KEY", key, jwtData)
-             //   items.push({pubKey: key, expiredAd: new Date(jwtData.exp*1000)})
+                const tokenBytes =obj[key];
+                 const tokenData= readToken(tokenBytes, hex2buf(key));
+                console.log("KEY", key, tokenData)
+                items.push({pubKey: key, expiredAd: new Date(tokenData.exp*1000)})
             }
 
         }

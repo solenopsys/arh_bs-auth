@@ -12,7 +12,7 @@ import {createToken, genHash, SeedClipper} from "@solenopsys/fl-crypto";
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
+    styleUrls: ['./login.component.scss','../fields.scss'],
     encapsulation: ViewEncapsulation.Emulated,
 })
 export class LoginComponent {
