@@ -36,7 +36,10 @@ export class LoginComponent {
 
             console.log("succesed", res, privateKey)
 
-            const token=createToken({user: res.publicKey, access: "simple",expired:"14d"}, privateKey);
+            const  dayMills = 24 * 60 * 60 * 1000;
+            const expired = new Date().getMilliseconds()+ 14 * dayMills;
+
+            const token=createToken({user: res.publicKey, access: "simple",expired:expired+""}, privateKey);
 
             this.ss.saveSession(res.publicKey, token);
             //navigate
