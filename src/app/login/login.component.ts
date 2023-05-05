@@ -19,6 +19,7 @@ export class LoginComponent {
     login: string;
     password: string;
 
+    error: any;
     clipper = new SeedClipper('AES-CBC',crypto);
 
     result:string
@@ -41,7 +42,7 @@ export class LoginComponent {
 
             const token=createToken({user: res.publicKey, access: "simple",expired:expired+""}, privateKey);
 
-            this.ss.saveSession(res.publicKey, token);
+            await this.ss.saveSession(res.publicKey, token);
             //navigate
             this.router.navigate(['/status'], {queryParams: {state: token}})
             console.log("succes token", token)
@@ -50,6 +51,7 @@ export class LoginComponent {
 
         } catch (e) {
             this.result="Error: "+e.message
+            this.error= e
         }
 
 

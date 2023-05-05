@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CryptoTools, generateMnemonic, genHash, SeedClipper} from '@solenopsys/fl-crypto';
+import {buf2hex, CryptoTools, generateMnemonic, genHash, SeedClipper} from '@solenopsys/fl-crypto';
 import {BehaviorSubject, debounceTime, firstValueFrom, map, Observable, Subject, Subscription} from "rxjs";
 import {RegisterData} from "../model";
 import {HttpClient} from "@angular/common/http";
@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         const tr = this.transport.uid;
         const hash = await genHash(this.password, this.login);
         const publicKey = await new CryptoTools().publicKeyFromPrivateKey(this.privateKey);
-        const pubkeyHex = Array.from(publicKey).map(b => b.toString().padStart(2, '0')).join('');
+        const pubkeyHex = buf2hex(publicKey);
         const registerData: RegisterData = {
             transport: tr,
             login: this.login,
