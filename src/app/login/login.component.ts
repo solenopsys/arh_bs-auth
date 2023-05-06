@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 import {firstValueFrom} from "rxjs";
@@ -15,12 +15,12 @@ import {createToken, genHash, SeedClipper} from "@solenopsys/fl-crypto";
     styleUrls: ['./login.component.scss','../fields.scss'],
     encapsulation: ViewEncapsulation.Emulated,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
     login: string;
     password: string;
 
     error: any;
-    clipper = new SeedClipper('AES-CBC',crypto);
+    clipper:SeedClipper ;
 
     result:string
 
@@ -55,5 +55,9 @@ export class LoginComponent {
         }
 
 
+    }
+
+    ngOnInit(): void {
+       this.clipper = new SeedClipper('AES-CBC',window.crypto);
     }
 }

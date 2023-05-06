@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     login: string;
 
-    clipper = new SeedClipper('AES-CBC', crypto);
+    clipper: SeedClipper;
     encryptedKey: string;
 
     regenerate: Subject<void> = new Subject<void>();
@@ -103,6 +103,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.clipper = new SeedClipper('AES-CBC', window.crypto);
         this.subscription = this.regenerate.asObservable().pipe(debounceTime(300)).subscribe(async () => {
 
             this.privateKey = await new CryptoTools().privateKeyFromSeed(this.mnemonic);
