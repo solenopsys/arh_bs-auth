@@ -4,6 +4,7 @@ import {BehaviorSubject, debounceTime, firstValueFrom, map, Observable, Subject,
 import {RegisterData} from "../model";
 import {HttpClient} from "@angular/common/http";
 import {DataProvider, EntityTitle} from '@solenopsys/ui-utils';
+import {KeysService} from "../keys.service";
 
 
 const EMAIL = {uid: "email", title: "Email"};
@@ -63,7 +64,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     error
     fieldWidth=  300;
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private ks: KeysService) {
 
     }
 
@@ -83,7 +84,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         console.log(registerData)
 
 
-        firstValueFrom(this.httpClient.post("/api/register", JSON.stringify(registerData))).then(res => {
+        this.ks.register(registerData).then(res => {
             this.success = true
             console.log(res)
         }).catch(err => {

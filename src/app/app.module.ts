@@ -30,23 +30,23 @@ export const PROVIDERS_CONF = [
 const ROUTERS: Route[] = [
     {
         path: "",
-        redirectTo: "login",
+        redirectTo: "login/.",
         pathMatch: 'full'
     },
     {
-        path: "status",
+        path: "status/.",
         component: StatusComponent,
     },
     {
-        path: "confirm",
+        path: "confirm/.",
         component: ConfirmComponent,
     },
     {
-        path: "login",
+        path: "login/.",
         component: LoginComponent,
     },
     {
-        path: "register",
+        path: "register/.",
         component: RegisterComponent,
     },
 

@@ -6,6 +6,7 @@ import {RegisterData} from "../model";
 import {Router} from "@angular/router";
 import {SessionsService} from "../sessions.sevice";
 import {createToken, genHash, SeedClipper} from "@solenopsys/fl-crypto";
+import {KeysService} from "../keys.service";
 
 
 
@@ -25,14 +26,14 @@ export class LoginComponent implements OnInit{
     result:string
 
 
-    constructor(private httpClient: HttpClient, private router: Router, private ss: SessionsService) {
+    constructor(private ks: KeysService, private router: Router, private ss: SessionsService) {
     }
 
 
     async load() {
         const hash = await genHash(this.password, this.login);
         try{
-            const res = await firstValueFrom(this.httpClient.post<RegisterData>("/api/key", hash))
+            const res = await this.ks.key(hash)
             const privateKey = await this.clipper.decryptData(res.encryptedKey, this.password)
 
             console.log("succesed", res, privateKey)
@@ -44,7 +45,7 @@ export class LoginComponent implements OnInit{
 
             await this.ss.saveSession(res.publicKey, token);
             //navigate
-            this.router.navigate(['/status'], {queryParams: {state: token}})
+            this.router.navigate(['/status/.'], {queryParams: {state: token}})
             console.log("succes token", token)
 
 
