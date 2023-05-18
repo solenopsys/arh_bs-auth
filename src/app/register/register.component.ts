@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {buf2hex, CryptoTools, generateMnemonic, genHash, SeedClipper} from '@solenopsys/fl-crypto';
-import {BehaviorSubject, debounceTime, firstValueFrom, map, Observable, Subject, Subscription} from "rxjs";
+import {buf2hex, CryptoTools, CryptoWrapper, generateMnemonic, Hash, SeedClipper} from '@solenopsys/fl-crypto';
+import {BehaviorSubject, debounceTime, map, Observable, Subject, Subscription} from "rxjs";
 import {RegisterData} from "../model";
-import {HttpClient} from "@angular/common/http";
 import {DataProvider, EntityTitle} from '@solenopsys/ui-utils';
 import {KeysService} from "../keys.service";
 
+const  cw = new CryptoWrapper(crypto);
 
 const EMAIL = {uid: "email", title: "Email"};
 
@@ -70,8 +70,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
     async sendCode() {
         const tr = this.transport.uid;
-        const hash = await genHash(this.password, this.login);
-        const publicKey = await new CryptoTools().publicKeyFromPrivateKey(this.privateKey);
+
+        const h=new Hash(cw)
+        const hash = await h.genHash(this.password, this.login);
+        const publicKey = await new CryptoTools(cw).publicKeyFromPrivateKey(this.privateKey);
         const pubkeyHex = buf2hex(publicKey);
         const registerData: RegisterData = {
             transport: tr,
@@ -104,10 +106,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.clipper = new SeedClipper('AES-CBC', window.crypto);
+        this.clipper = new SeedClipper('AES-CBC', cw);
         this.subscription = this.regenerate.asObservable().pipe(debounceTime(300)).subscribe(async () => {
 
-            this.privateKey = await new CryptoTools().privateKeyFromSeed(this.mnemonic);
+            this.privateKey = await new CryptoTools(cw).privateKeyFromSeed(this.mnemonic);
 
             this.encryptedKey = await this.clipper.encryptData(this.privateKey, this.password)
         });

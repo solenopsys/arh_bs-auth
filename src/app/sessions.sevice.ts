@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {hex2buf, readToken} from "@solenopsys/fl-crypto";
+import {CryptoWrapper, hex2buf, Tokens} from "@solenopsys/fl-crypto";
 
 const STORAGE_KEY = "auth";
 
@@ -34,7 +34,10 @@ export class SessionsService {
             for (const key of keys) {
                 const tokenBytes = obj[key];
                 try {
-                    const tokenData = readToken(tokenBytes, hex2buf(key));
+                    const cw=new CryptoWrapper(crypto)
+                    const tokens= new Tokens(cw);
+
+                    const tokenData = await tokens.readToken(tokenBytes, hex2buf(key));
                     console.log("KEY", key, tokenData)
                     const expired: number = parseInt(tokenData.payload.expired) ;
                     items.push({pubKey: key, expiredAt: new Date(expired * 1000)})

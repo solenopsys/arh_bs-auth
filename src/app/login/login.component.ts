@@ -1,14 +1,11 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-
-import {firstValueFrom} from "rxjs";
-import {RegisterData} from "../model";
 import {Router} from "@angular/router";
 import {SessionsService} from "../sessions.sevice";
-import {createToken, genHash, SeedClipper} from "@solenopsys/fl-crypto";
+import {CryptoWrapper, Hash, SeedClipper, Tokens} from "@solenopsys/fl-crypto";
 import {KeysService} from "../keys.service";
 
 
+const  cw = new CryptoWrapper(crypto);
 
 @Component({
     selector: 'app-login',
@@ -31,7 +28,8 @@ export class LoginComponent implements OnInit{
 
 
     async load() {
-        const hash = await genHash(this.password, this.login);
+        const h=new Hash(cw)
+        const hash = await h.genHash(this.password, this.login);
         try{
             const res = await this.ks.key(hash)
             const privateKey = await this.clipper.decryptData(res.encryptedKey, this.password)
@@ -41,7 +39,8 @@ export class LoginComponent implements OnInit{
             const  dayMills = 24 * 60 * 60 * 1000;
             const expired = new Date().getMilliseconds()+ 14 * dayMills;
 
-            const token=createToken({user: res.publicKey, access: "simple",expired:expired+""}, privateKey);
+            const t=new Tokens(cw)
+            const token=await t.createToken({user: res.publicKey, access: "simple",expired:expired+""}, privateKey);
 
             await this.ss.saveSession(res.publicKey, token);
             //navigate
@@ -59,6 +58,6 @@ export class LoginComponent implements OnInit{
     }
 
     ngOnInit(): void {
-       this.clipper = new SeedClipper('AES-CBC',window.crypto);
+       this.clipper = new SeedClipper('AES-CBC',cw);
     }
 }
