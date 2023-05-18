@@ -6,7 +6,7 @@
   "prefix": "app",
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-devkit/build-angular:browser-esbuild",
       "outputs": [
         "{options.outputPath}"
       ],
@@ -121,10 +121,8 @@
         "development": {
           "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
+          "sourceMap": true
         }
       },
       "defaultConfiguration": "development"
