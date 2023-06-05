@@ -1,5 +1,5 @@
 {
-  "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "../../../node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "projects": {
     "fr-auth": {
@@ -10,7 +10,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
-            "outputPath": "../../dist/fronts/fr-auth",
+            "outputPath": "../../../dist/fronts/fr-auth",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "./src/polyfills.ts",
@@ -19,13 +19,13 @@
               "src/favicon.ico",
               "src/assets",
               {
-                "input": "../../libraries/solenopsys/ui-templates/src/assets",
+                "input": "../../../packages/solenopsys/uimatrix/ui-templates/src/assets",
                 "glob": "**/*",
                 "output": "assets"
               }
             ],
             "styles": [
-              "../../libraries/solenopsys/ui-templates//src/assets/styles.scss"
+              "../../../packages/solenopsys/uimatrix/ui-templates/src/assets/styles.scss"
             ],
             "scripts": []
           },
@@ -66,6 +66,6 @@
     }
   },
   "cli": {
-    "analytics": "d1d8a92e-7192-42d8-942d-7071ed505a62"
+    "analytics": false
   }
 }
