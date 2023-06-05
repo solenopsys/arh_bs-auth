@@ -2,14 +2,14 @@
   "name": "@solenopsys/fr-auth",
   "version": "0.1.1",
   "dependencies": {
-    "@ipld/car": "^5.0.0",
-    "@ipld/dag-cbor": "^9.0.0",
-    "@ipld/dag-json": "^10.0.0",
-    "ipfs-core": "^0.18.0",
-    "multiformats": "^11.0.0"
-  },
-  "scripts": {
-    "test": "node index.js",
-    "build": "etsc "
+    "@solenopsys/fl-auth": "^0.1.0",
+    "@solenopsys/fl-crypto": "^0.1.0",
+    "@solenopsys/fl-globals": "^0.1.0",
+    "@solenopsys/fl-storage": "^0.1.0",
+    "@solenopsys/ui-controls": "^0.1.0",
+    "@solenopsys/ui-forms": "^0.1.0",
+    "@solenopsys/ui-qr": "^0.1.0",
+    "@solenopsys/ui-templates": "^0.1.0",
+    "@solenopsys/ui-utils": "^0.1.0"
   }
 }
