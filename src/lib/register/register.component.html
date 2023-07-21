@@ -1,0 +1,102 @@
+<div style="display: flex">
+    <div style="width: 600px">
+        <ng-container *ngIf="!success" style="display: flex">
+            <h4>Seed phase.</h4>
+            <div class="field-block">
+                <div>
+                    <div>
+                        <ui-multiline-field [width]="fieldWidth" [title]="'Seed phase'" [(value)]="mnemonic"
+                                            (valueChange)="regenerate.next()"></ui-multiline-field>
+                    </div>
+                </div>
+                <div class="field-description"> With the help of this phrase, you can perform any
+                    important action in Solenopsys, such as logging in, sending money, and controlling your clusters.You
+                    can imagine your own seed phase or
+                    <a style="cursor: pointer;color:red;text-decoration: underline;"
+                       (click)="generateSeed()">generate</a> it.
+                </div>
+            </div>
+
+            <ng-container *ngIf="mnemonic">
+                <h4>Password</h4>
+                <div class="field-block">
+                    <div>
+
+                        <div>
+                            <ui-text-field [width]="fieldWidth" [(value)]="password" (valueChange)="regenerate.next()"
+                                           [password]="true"
+                                           [title]="'Password'"></ui-text-field>
+                        </div>
+                    </div>
+                    <div class="field-description">
+                        to protect the seed phase. The seed phase is always stored and transferred in an
+                        encrypted
+                    </div>
+                </div>
+
+
+                <ng-container *ngIf="password">
+                    <h4>Encrypted seed</h4>
+                    <div class="field-block">
+
+                        <div [ngStyle]="{minWidth:fieldWidth+'px'}" class="qr-wrapper">
+                            <ui-qrcode [data]="encryptedKey"></ui-qrcode>
+                        </div>
+                        <div class="field-description">
+                            You are can save this QR code to restore your seed phase in the future.
+                        </div>
+
+                    </div>
+                    <h4>Messenger</h4>
+                    <div class="field-block">
+
+
+                        <div>
+                            <ui-select-field   [width]="fieldWidth" [(value)]="transport"
+                                             [dataProvider]="messagersProvider"></ui-select-field>
+                        </div>
+
+                        <div class="field-description">
+                            What is the most convenient way for you to authenticate?
+                        </div>
+
+                    </div>
+
+                    <h4>Account</h4>
+                    <div class="field-block">
+
+                        <div>
+
+                            <div>
+                                <ui-text-field [title]="'Login'" [width]="fieldWidth" [(value)]="login"></ui-text-field>
+                            </div>
+
+                        </div>
+                        <div class="field-description"> name in your massager</div>
+                    </div>
+
+                    <div class="field-block">
+                        <ng-container *ngIf="login">
+                            <ui-button [title]="'Зарегистрироваться'" (click)="sendCode()"></ui-button>
+                        </ng-container>
+
+                    </div>
+
+                    <div class="field-block">
+                        <ng-container *ngIf="error">
+                            Error: {{error.message}}
+                        </ng-container>
+                    </div>
+
+
+                </ng-container>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="success">
+            Private key is sent to the server. To store this key on the server, you need to open the link in the message
+            that is
+            sent to you to the <b>{{transport?.title}}</b>
+        </ng-container>
+    </div>
+
+</div>

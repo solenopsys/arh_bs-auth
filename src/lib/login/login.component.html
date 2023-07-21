@@ -1,0 +1,32 @@
+<div>
+    <h4>Login</h4>
+    <div class="field-block">
+        <div>
+            <ui-text-field [title]="'Login'" [(value)]="login"></ui-text-field>
+        </div>
+        <div class="field-description"> Account name</div>
+    </div>
+    <ng-container *ngIf="login">
+        <h4>Password</h4>
+        <div class="field-block">
+            <div>
+                <ui-text-field [(value)]="password" [password]="true" [title]="'Password'"></ui-text-field>
+            </div>
+            <div class="field-description"> password for seed decrypted</div>
+        </div>
+        <ng-container *ngIf="password">
+            <ui-button [title]="'Login'" (click)="load()"></ui-button>
+        </ng-container>
+    </ng-container>
+    <div class="field-block">
+        <a style="cursor: pointer;color:red;text-decoration: underline;" [routerLink]="'/register/.'">register</a>
+    </div>
+
+    <div class="field-block">
+        <ng-container *ngIf="error">
+            Error: {{error.message}}
+        </ng-container>
+    </div>
+</div>
+
+

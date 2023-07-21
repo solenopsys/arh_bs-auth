@@ -1,5 +1,16 @@
-import {trailingSlash} from "@solenopsys/fl-globals";
+import 'zone.js/dist/zone';
 
-trailingSlash()
+// import {enableProdMode} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
-import('./bootstrap').catch((err) => console.error(err));
+
+import {AppModule} from './lib/app.module';
+
+
+// if (environment.production) {
+//     enableProdMode();
+// }
+
+platformBrowserDynamic()
+    .bootstrapModule(AppModule)
+    .catch((err) => console.error(err));

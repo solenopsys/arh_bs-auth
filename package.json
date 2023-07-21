@@ -1,15 +1,16 @@
 {
   "name": "@solenopsys/fr-auth",
   "version": "0.1.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite --open",
+    "build": "vite build",
+    "start": "vite preview --open"
+  },
   "dependencies": {
-    "@solenopsys/fl-auth": "^0.1.0",
-    "@solenopsys/fl-crypto": "^0.1.0",
-    "@solenopsys/fl-globals": "^0.1.0",
-    "@solenopsys/fl-storage": "^0.1.0",
-    "@solenopsys/ui-controls": "^0.1.0",
-    "@solenopsys/ui-forms": "^0.1.0",
-    "@solenopsys/ui-qr": "^0.1.0",
-    "@solenopsys/ui-templates": "^0.1.0",
-    "@solenopsys/ui-utils": "^0.1.0"
+
   }
 }
+
+

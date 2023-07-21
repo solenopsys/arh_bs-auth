@@ -1,10 +1,26 @@
 {
   "extends": "../../../tsconfig.develop.json",
+  "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "rootDir": "../../../",
-    "types": []
+    "outDir": "../../../dist/fronts/fr-auth",
+    "strict": false,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": false,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "target": "es2020",
+    "module": "es2020",
+    "types": [
+      "vite/client"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ]
   },
-  "files": ["src/main.ts", "src/polyfills.ts"],
-  "include": ["src/**/*.d.ts"],
   "exclude": [ "**/*.test.ts", "**/*.spec.ts"]
+
 }

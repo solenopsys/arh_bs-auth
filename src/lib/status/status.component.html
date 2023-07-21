@@ -1,0 +1,8 @@
+<h4>Sessions</h4>
+<div *ngIf="sessions">
+    <div *ngFor="let s of sessions">
+        {{keyPrefix(s.pubKey)}}...  - {{ s.expiredAt  | date:'yyyy-MM-dd hh:mm' }}
+
+        <button (click)="deleteSession(s.pubKey)">Delete</button>
+    </div>
+</div>
