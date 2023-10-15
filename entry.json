@@ -2,8 +2,8 @@
   "layout": {
     "module":"@solenopsys/mf-auth",
     "data": {
-      "logo": "/endpoints/solenopsys/fr-auth/assets/logo.svg",
-      "favicon": "/endpoints/solenopsys/fr-auth/assets/favicon.svg",
+      "logo": "/bootstraps/solenopsys/bs-auth/assets/logo.svg",
+      "favicon": "/bootstraps/solenopsys/bs-auth/assets/favicon.svg",
       "title": "Auth"
     }
   },
